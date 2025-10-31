@@ -36,7 +36,7 @@ if page == "Add New Part":
     if submitted:
         if part_Number and part_name:
             new_part = {
-                "Part ID": part_number,
+                "Part Number": part_number,
                 "Part Name": part_name,
                 "Category": category,
                 "Quantity": quantity,
