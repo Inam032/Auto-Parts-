@@ -5,7 +5,7 @@ import pandas as pd
 st.set_page_config(page_title="Honda Spare Parts", page_icon="bycicle.png", layout="wide")
 
 # ---- TITLE ----
-st.title("bycicle.png" Honda Spare Parts")
+st.title("Honda Spare Parts")
 st.markdown("manage your spare parts inventory, and sales records.")
 
 # ---- INITIAL DATA ----
