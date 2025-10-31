@@ -19,40 +19,41 @@ st.sidebar.header("Navigation")
 page = st.sidebar.radio("Go to:", ["Add New Part", "View Inventory", "Search Parts Number", "Update/Delete Parts", "About"])
 
 # ---- ADD NEW PART ----
+# ---- ADD NEW PART ----
 if page == "Add New Part":
     st.header("➕ Add New Spare Part")
 
     with st.form("add_form"):
-
-        search_part_number = st.text_input("🔢 Enter Part Number")
-        part_Number = st.text_input("Part Number")
+        part_id = st.text_input("Part ID")              # ✅ defined first
+        part_number = st.text_input("Part Number")
         part_name = st.text_input("Part Name")
         category = st.selectbox("Category", ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"])
         quantity = st.number_input("Quantity", min_value=0, step=1)
-        price = st.number_input("Price (PKR)", min_value=0.0, step=0.1)
-        supplier = st.text_input("Supplier Name, add Supplier")
+        price = st.number_input("Price (USD)", min_value=0.0, step=0.1)
+        supplier = st.text_input("Supplier Name")
         submitted = st.form_submit_button("Add Part")
 
     if submitted:
-        if part_Number and part_name:
-           new_part = { 
-"Part ID": part_id,
-            "Part Number": part_number,
-            "Part Name": part_name,
-            "Category": category,
-            "Quantity": quantity,
-            "Price (USD)": price,
-            "Supplier": supplier
-        }
+        if part_id and part_name:
+            new_part = {
+                "Part ID": part_id,
+                "Part Number": part_number,
+                "Part Name": part_name,
+                "Category": category,
+                "Quantity": quantity,
+                "Price (USD)": price,
+                "Supplier": supplier
+            }
 
-        st.session_state.parts_data = pd.concat(
-            [st.session_state.parts_data, pd.DataFrame([new_part])],
-            ignore_index=True
-        )
+            st.session_state.parts_data = pd.concat(
+                [st.session_state.parts_data, pd.DataFrame([new_part])],
+                ignore_index=True
+            )
 
-        st.success(f"✅ '{part_name}' added successfully!")
-    else:
-        st.warning("⚠️ Please enter both Part ID and Part Name.")
+            st.success(f"✅ '{part_name}' added successfully!")
+        else:
+            st.warning("⚠️ Please enter both Part ID and Part Name.")
+
 # ---- VIEW INVENTORY ----
 elif page == "View Inventory":
     st.header("📦 Spare Parts Inventory")
