@@ -36,14 +36,13 @@ if page == "Add New Part":
     if submitted:
         if part_Number and part_name:
             new_part = {
-                "Part ID": part_ID,
-                 "Part Number": part_number,
-                "Part Name": part_name,
-                "Category": category,
-                "Quantity": quantity,
-                "Price (PKR)": price,
-                "Supplier": supplier
-            }
+                "Part ID": part_id,
+            "Part Number": part_number,
+            "Part Name": part_name,
+            "Category": category,
+            "Quantity": quantity,
+            "Price (USD)": price,
+            "Supplier": supplie             }
             st.session_state.parts_data = pd.concat(
                 [st.session_state.parts_data, pd.DataFrame([new_part])], ignore_index=True
             )
