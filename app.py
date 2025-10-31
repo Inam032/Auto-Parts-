@@ -19,18 +19,24 @@ st.sidebar.header("Navigation")
 page = st.sidebar.radio("Go to:", ["Add New Part", "View Inventory", "Search Parts Number", "Update/Delete Parts", "About"])
 
 # ---- ADD NEW PART ----
-# ---- ADD NEW PART ----
-# ---- ADD NEW PART ----
-# ---- ADD NEW PART ----
 if page == "Add New Part":
     st.header("➕ Add New Spare Part")
+
+    # Initialize form fields in session_state
+    if "part_id" not in st.session_state:
+        st.session_state.part_id = ""
+    if "part_number" not in st.session_state:
+        st.session_state.part_number = ""
+    if "part_name" not in st.session_state:
+        st.session_state.part_name = ""
+    if "supplier" not in st.session_state:
+        st.session_state.supplier = ""
 
     with st.form("add_form"):
         st.subheader("Add or Search Spare Part")
 
-        # 🔍 Search existing part first
+        # 🔍 Search existing part
         search_part = st.text_input("🔍 Search by Part ID, Number, or Name")
-
         if search_part:
             filtered = st.session_state.parts_data[
                 st.session_state.parts_data.applymap(str)
@@ -42,19 +48,16 @@ if page == "Add New Part":
             else:
                 st.warning("No matching parts found.")
 
-        st.divider()  # visual separator
+        st.divider()
 
-        # 🧩 Add New Part
-        part_id = st.text_input("Part ID")
-        part_number = st.text_input("Part Number")
-        part_name = st.text_input("Part Name")
-        category = st.selectbox(
-            "Category",
-            ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"]
-        )
+        # 🧩 Add New Part fields
+        part_id = st.text_input("Part ID", st.session_state.part_id)
+        part_number = st.text_input("Part Number", st.session_state.part_number)
+        part_name = st.text_input("Part Name", st.session_state.part_name)
+        category = st.selectbox("Category", ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"])
         quantity = st.number_input("Quantity", min_value=0, step=1)
         price = st.number_input("Price (USD)", min_value=0.0, step=0.1)
-        supplier = st.text_input("Supplier Name")
+        supplier = st.text_input("Supplier Name", st.session_state.supplier)
 
         submitted = st.form_submit_button("Add Part")
 
@@ -75,7 +78,14 @@ if page == "Add New Part":
                 ignore_index=True
             )
 
+            # ✅ Clear the form fields
+            st.session_state.part_id = ""
+            st.session_state.part_number = ""
+            st.session_state.part_name = ""
+            st.session_state.supplier = ""
+
             st.success(f"✅ '{part_name}' added successfully!")
+            st.rerun()  # refreshes the app so the form clears instantly
         else:
             st.warning("⚠️ Please enter both Part ID and Part Name.")
 
