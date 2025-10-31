@@ -23,6 +23,8 @@ if page == "Add New Part":
     st.header("➕ Add New Spare Part")
 
     with st.form("add_form"):
+
+        Search_Part Number = st.text_input("part Number")
         part_id = st.text_input("Part Number")
         part_name = st.text_input("Part Name")
         category = st.selectbox("Category", ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"])
