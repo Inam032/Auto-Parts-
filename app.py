@@ -44,7 +44,6 @@ if page == "Add New Part":
         st.divider()  # nice visual separator
 
         # 🧩 Add New Part
-        part_id = st.text_input("Part ID")
         part_number = st.text_input("Part Number")
         part_name = st.text_input("Part Name")
         category = st.selectbox("Category", ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"])
