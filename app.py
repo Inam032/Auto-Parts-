@@ -21,6 +21,7 @@ page = st.sidebar.radio("Go to:", ["Add New Part", "View Inventory", "Search Par
 # ---- ADD NEW PART ----
 # ---- ADD NEW PART ----
 # ---- ADD NEW PART ----
+# ---- ADD NEW PART ----
 if page == "Add New Part":
     st.header("➕ Add New Spare Part")
 
@@ -41,12 +42,16 @@ if page == "Add New Part":
             else:
                 st.warning("No matching parts found.")
 
-        st.divider()  # nice visual separator
+        st.divider()  # visual separator
 
         # 🧩 Add New Part
+        part_id = st.text_input("Part ID")
         part_number = st.text_input("Part Number")
         part_name = st.text_input("Part Name")
-        category = st.selectbox("Category", ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"])
+        category = st.selectbox(
+            "Category",
+            ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"]
+        )
         quantity = st.number_input("Quantity", min_value=0, step=1)
         price = st.number_input("Price (USD)", min_value=0.0, step=0.1)
         supplier = st.text_input("Supplier Name")
@@ -54,6 +59,7 @@ if page == "Add New Part":
         submitted = st.form_submit_button("Add Part")
 
     if submitted:
+        if part_id and part_name:
             new_part = {
                 "Part ID": part_id,
                 "Part Number": part_number,
