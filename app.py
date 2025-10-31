@@ -35,23 +35,24 @@ if page == "Add New Part":
 
     if submitted:
         if part_Number and part_name:
-            new_part = {
-                "Part ID": part_id,
+           new_part = {
+            "Part ID": part_id,
             "Part Number": part_number,
             "Part Name": part_name,
             "Category": category,
             "Quantity": quantity,
             "Price (USD)": price,
-            "Supplier": supplier             }
-              st.session_state.parts_data = pd.concat(
+            "Supplier": supplier
+        }
+
+        st.session_state.parts_data = pd.concat(
             [st.session_state.parts_data, pd.DataFrame([new_part])],
             ignore_index=True
         )
 
         st.success(f"✅ '{part_name}' added successfully!")
-        else:
-            st.warning("⚠️ Please enter both Part number and Part Name.")
-
+    else:
+        st.warning("⚠️ Please enter both Part ID and Part Name.")
 # ---- VIEW INVENTORY ----
 elif page == "View Inventory":
     st.header("📦 Spare Parts Inventory")
