@@ -54,7 +54,6 @@ if page == "Add New Part":
         submitted = st.form_submit_button("Add Part")
 
     if submitted:
-        if part_id and part_name:
             new_part = {
                 "Part ID": part_id,
                 "Part Number": part_number,
