@@ -27,7 +27,7 @@ if page == "Add New Part":
         part_name = st.text_input("Part Name")
         category = st.selectbox("Category", ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"])
         quantity = st.number_input("Quantity", min_value=0, step=1)
-        price = st.number_input("Price (USD)", min_value=0.0, step=0.1)
+        price = st.number_input("Price (PKR)", min_value=0.0, step=0.1)
         supplier = st.text_input("Supplier Name")
         submitted = st.form_submit_button("Add Part")
 
