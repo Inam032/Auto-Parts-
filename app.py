@@ -11,7 +11,7 @@ st.markdown("manage your spare parts inventory, and sales records.")
 # ---- INITIAL DATA ----
 if "parts_data" not in st.session_state:
     st.session_state.parts_data = pd.DataFrame(
-        columns=["Part ID", "Part Name", "Category", "Quantity", "Price (PKR)", "Supplier"]
+        columns=["Part Number", "Part Name", "Category", "Quantity", "Price (PKR)", "Supplier"]
     )
 
 # ---- SIDEBAR ----
