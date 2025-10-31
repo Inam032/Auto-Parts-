@@ -24,7 +24,7 @@ if page == "Add New Part":
 
     with st.form("add_form"):
 
-        Search_Part Number = st.text_input("part Number")
+        search_part_number = st.text_input("🔢 Enter Part Number")
         part_id = st.text_input("Part Number")
         part_name = st.text_input("Part Name")
         category = st.selectbox("Category", ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"])
