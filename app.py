@@ -42,11 +42,13 @@ if page == "Add New Part":
             "Category": category,
             "Quantity": quantity,
             "Price (USD)": price,
-            "Supplier": supplie             }
-            st.session_state.parts_data = pd.concat(
-                [st.session_state.parts_data, pd.DataFrame([new_part])], ignore_index=True
-            )
-            st.success(f"✅ '{part_name}' added successfully!")
+            "Supplier": supplier             }
+              st.session_state.parts_data = pd.concat(
+            [st.session_state.parts_data, pd.DataFrame([new_part])],
+            ignore_index=True
+        )
+
+        st.success(f"✅ '{part_name}' added successfully!")
         else:
             st.warning("⚠️ Please enter both Part number and Part Name.")
 
