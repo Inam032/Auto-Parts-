@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 
 # ---- PAGE CONFIG ----
-st.set_page_config(page_title="Automobile Spare Parts", page_icon="🚗", layout="wide")
+st.set_page_config(page_title="Honda Spare Parts", page_icon="bycicle.png", layout="wide")
 
 # ---- TITLE ----
 st.title("🚗 Automotive Spare Parts")
-st.markdown("manage your spare parts inventory, suppliers, and sales records.")
+st.markdown("manage your spare parts inventory, and sales records.")
 
 # ---- INITIAL DATA ----
 if "parts_data" not in st.session_state:
@@ -34,7 +34,7 @@ if page == "Add New Part":
     if submitted:
         if part_id and part_name:
             new_part = {
-                "Part ID": part_id,
+                "Part ID": part_number,
                 "Part Name": part_name,
                 "Category": category,
                 "Quantity": quantity,
@@ -46,7 +46,7 @@ if page == "Add New Part":
             )
             st.success(f"✅ '{part_name}' added successfully!")
         else:
-            st.warning("⚠️ Please enter both Part ID and Part Name.")
+            st.warning("⚠️ Please enter both Part number and Part Name.")
 
 # ---- VIEW INVENTORY ----
 elif page == "View Inventory":
