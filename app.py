@@ -25,7 +25,7 @@ if page == "Add New Part":
     with st.form("add_form"):
 
         search_part_number = st.text_input("🔢 Enter Part Number")
-        part_id = st.text_input("Part Number")
+        part_Number = st.text_input("Part Number")
         part_name = st.text_input("Part Name")
         category = st.selectbox("Category", ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"])
         quantity = st.number_input("Quantity", min_value=0, step=1)
@@ -34,7 +34,7 @@ if page == "Add New Part":
         submitted = st.form_submit_button("Add Part")
 
     if submitted:
-        if part_id and part_name:
+        if part_Number and part_name:
             new_part = {
                 "Part ID": part_number,
                 "Part Name": part_name,
