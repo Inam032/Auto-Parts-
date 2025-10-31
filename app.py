@@ -5,7 +5,7 @@ import pandas as pd
 st.set_page_config(page_title="Automobile Spare Parts", page_icon="🚗", layout="wide")
 
 # ---- TITLE ----
-st.title("🚗 Automobile Spare Parts Management App")
+st.title("🚗 Automotive Spare Parts")
 st.markdown("Easily manage your spare parts inventory, suppliers, and sales records.")
 
 # ---- INITIAL DATA ----
