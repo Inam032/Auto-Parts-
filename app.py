@@ -6,29 +6,29 @@ st.set_page_config(page_title="Automobile Spare Parts", page_icon="🚗", layout
 
 # ---- TITLE ----
 st.title("🚗 Automotive Spare Parts")
-st.markdown("Easily manage your spare parts inventory, suppliers, and sales records.")
+st.markdown("manage your spare parts inventory, suppliers, and sales records.")
 
 # ---- INITIAL DATA ----
 if "parts_data" not in st.session_state:
     st.session_state.parts_data = pd.DataFrame(
-        columns=["Part ID", "Part Name", "Category", "Quantity", "Price (USD)", "Supplier"]
+        columns=["Part ID", "Part Name", "Category", "Quantity", "Price (PKR)", "Supplier"]
     )
 
 # ---- SIDEBAR ----
 st.sidebar.header("Navigation")
-page = st.sidebar.radio("Go to:", ["Add New Part", "View Inventory", "Search Parts", "Update/Delete Parts", "About"])
+page = st.sidebar.radio("Go to:", ["Add New Part", "View Inventory", "Search Parts Number", "Update/Delete Parts", "About"])
 
 # ---- ADD NEW PART ----
 if page == "Add New Part":
     st.header("➕ Add New Spare Part")
 
     with st.form("add_form"):
-        part_id = st.text_input("Part ID")
+        part_id = st.text_input("Part Number")
         part_name = st.text_input("Part Name")
         category = st.selectbox("Category", ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"])
         quantity = st.number_input("Quantity", min_value=0, step=1)
         price = st.number_input("Price (PKR)", min_value=0.0, step=0.1)
-        supplier = st.text_input("Supplier Name")
+        supplier = st.text_input("Supplier Name, add Supplier")
         submitted = st.form_submit_button("Add Part")
 
     if submitted:
@@ -38,7 +38,7 @@ if page == "Add New Part":
                 "Part Name": part_name,
                 "Category": category,
                 "Quantity": quantity,
-                "Price (USD)": price,
+                "Price (PKR)": price,
                 "Supplier": supplier
             }
             st.session_state.parts_data = pd.concat(
@@ -54,8 +54,8 @@ elif page == "View Inventory":
     st.dataframe(st.session_state.parts_data, use_container_width=True)
 
     total_value = (st.session_state.parts_data["Quantity"].astype(float) *
-                   st.session_state.parts_data["Price (USD)"].astype(float)).sum()
-    st.metric("💰 Total Inventory Value (USD)", f"${total_value:,.2f}")
+                   st.session_state.parts_data["Price (PKR)"].astype(float)).sum()
+    st.metric("💰 Total Inventory Value (PKR)", f"${total_value:,.2f}")
 
 # ---- SEARCH PARTS ----
 elif page == "Search Parts":
