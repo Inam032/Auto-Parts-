@@ -23,15 +23,35 @@ page = st.sidebar.radio("Go to:", ["Add New Part", "View Inventory", "Search Par
 if page == "Add New Part":
     st.header("➕ Add New Spare Part")
 
-    with st.form("add_form"):
-        part_id = st.text_input("Part ID")              # ✅ defined first
-        part_number = st.text_input("Part Number")
-        part_name = st.text_input("Part Name")
-        category = st.selectbox("Category", ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"])
-        quantity = st.number_input("Quantity", min_value=0, step=1)
-        price = st.number_input("Price (USD)", min_value=0.0, step=0.1)
-        supplier = st.text_input("Supplier Name")
-        submitted = st.form_submit_button("Add Part")
+  with st.form("add_form"):
+    st.subheader("Add or Search Spare Part")
+
+    # 🔍 Search existing part first
+    search_part = st.text_input("🔍 Search by Part ID, Number, or Name")
+
+    if search_part:
+        filtered = st.session_state.parts_data[
+            st.session_state.parts_data.applymap(str)
+            .apply(lambda row: row.str.lower().str.contains(search_part.lower()).any(), axis=1)
+        ]
+        if not filtered.empty:
+            st.info("Matching parts found:")
+            st.dataframe(filtered, use_container_width=True)
+        else:
+            st.warning("No matching parts found.")
+
+    st.divider()  # nice visual separator
+
+    # 🧩 Add New Part
+    part_id = st.text_input("Part ID")
+    part_number = st.text_input("Part Number")
+    part_name = st.text_input("Part Name")
+    category = st.selectbox("Category", ["Engine", "Brakes", "Suspension", "Electrical", "Body", "Other"])
+    quantity = st.number_input("Quantity", min_value=0, step=1)
+    price = st.number_input("Price (USD)", min_value=0.0, step=0.1)
+    supplier = st.text_input("Supplier Name")
+
+    submitted = st.form_submit_button("Add Part")
 
     if submitted:
         if part_id and part_name:
